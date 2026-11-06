@@ -1,0 +1,7 @@
+import { ArrowUpRight, ChevronDown, Download, Undo2, Redo2, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import type { Editor } from '../hooks/useEditor';
+export function Topbar({ editor }: { editor: Editor }) {
+ const [quality, setQuality] = useState(2);
+ return <header className="topbar"><a className="brand" href="/" aria-label="Forma início"><span className="brand-symbol">f</span>forma<span className="brand-dot">®</span></a><span className="divider"/><span className="studio-name">Mockup Studio <span className="beta">BETA</span></span><div className="project-name">Meu primeiro mockup <ChevronDown size={14}/></div><div className="top-actions"><span className="local-status"><i/> Tudo no seu navegador</span><button title="Desfazer" onClick={()=>void editor.travel('undo')}><Undo2 size={17}/></button><button title="Refazer" onClick={()=>void editor.travel('redo')}><Redo2 size={17}/></button><span className="divider"/><select aria-label="Resolução da exportação" value={quality} onChange={event=>setQuality(Number(event.target.value))}><option value={1}>PNG · 1×</option><option value={2}>PNG · 2×</option><option value={3}>PNG · 3×</option></select><button className="primary" onClick={()=>editor.exportPng(quality)}><Download size={16}/> Exportar PNG <ArrowUpRight size={14}/></button><span className="avatar">CN</span></div><Sparkles className="mobile-spark" size={20}/></header>;
+}
